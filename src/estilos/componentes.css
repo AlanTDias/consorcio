@@ -366,3 +366,20 @@ textarea.entrada {
   padding: 0.35rem 0.75rem;
   font-size: 0.85rem;
 }
+
+.quebra {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.status-atual {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.barra-simples {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+}

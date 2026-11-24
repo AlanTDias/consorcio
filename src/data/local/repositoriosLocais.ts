@@ -1,32 +1,52 @@
+import type { z } from 'zod'
 import { lerJson, type Armazenamento } from '../armazenamento'
 import {
   backupSchema,
+  clienteSchema,
   configSchema,
+  propostaSchema,
   usuarioSchema,
   VERSAO_BACKUP,
   type Backup,
+  type Cliente,
   type Config,
+  type Proposta,
   type Usuario,
 } from '../esquemas'
 import type {
   BackupServico,
   ConfigRepositorio,
+  PropostaRepositorio,
+  Repositorio,
   Repositorios,
   UsuarioRepositorio,
 } from '../repositorios'
+import seedClientes from '../seed/clientes.json'
 import seedConfig from '../seed/config.json'
+import seedPropostas from '../seed/propostas.json'
 import seedUsuarios from '../seed/usuarios.json'
+import { materializarDatas } from '../seed/datas'
 
 export const CHAVES = {
   config: 'consorcio:v1:config',
+  clientes: 'consorcio:v1:clientes',
+  propostas: 'consorcio:v1:propostas',
 } as const
 
-export const TAMANHO_MAXIMO_BACKUP = 2 * 1024 * 1024
+export const TAMANHO_MAXIMO_BACKUP = 5 * 1024 * 1024
 
 export class ErroBackup extends Error {}
 
 const configExemplo: Config = configSchema.parse(seedConfig)
 const usuariosExemplo: Usuario[] = usuarioSchema.array().parse(seedUsuarios)
+
+export function clientesExemplo(agora = new Date()): Cliente[] {
+  return clienteSchema.array().parse(materializarDatas(seedClientes, agora))
+}
+
+export function propostasExemplo(agora = new Date()): Proposta[] {
+  return propostaSchema.array().parse(materializarDatas(seedPropostas, agora))
+}
 
 class ConfigLocal implements ConfigRepositorio {
   constructor(private readonly armazenamento: Armazenamento) {}
@@ -58,10 +78,56 @@ class UsuariosSeed implements UsuarioRepositorio {
   }
 }
 
+class ColecaoLocal<T extends { id: string }> implements Repositorio<T> {
+  constructor(
+    protected readonly armazenamento: Armazenamento,
+    private readonly chave: string,
+    private readonly schema: z.ZodType<T>,
+    private readonly exemplo: () => T[],
+  ) {}
+
+  async listar(): Promise<T[]> {
+    const bruto = lerJson(this.armazenamento, this.chave)
+    if (bruto === undefined) return this.exemplo()
+    const lido = this.schema.array().safeParse(bruto)
+    return lido.success ? lido.data : this.exemplo()
+  }
+
+  async obter(id: string): Promise<T | undefined> {
+    return (await this.listar()).find((item) => item.id === id)
+  }
+
+  async salvar(item: T): Promise<T> {
+    const valido = this.schema.parse(item)
+    const lista = await this.listar()
+    const indice = lista.findIndex((x) => x.id === valido.id)
+    if (indice >= 0) lista[indice] = valido
+    else lista.push(valido)
+    this.gravar(lista)
+    return valido
+  }
+
+  gravar(lista: T[]): void {
+    this.armazenamento.setItem(this.chave, JSON.stringify(this.schema.array().parse(lista)))
+  }
+}
+
+class PropostasLocal extends ColecaoLocal<Proposta> implements PropostaRepositorio {
+  async proximoNumero(ano: number): Promise<string> {
+    const prefixo = `P-${ano}-`
+    const maior = (await this.listar())
+      .filter((p) => p.numero.startsWith(prefixo))
+      .reduce((m, p) => Math.max(m, Number(p.numero.slice(prefixo.length))), 0)
+    return `${prefixo}${String(maior + 1).padStart(4, '0')}`
+  }
+}
+
 class BackupLocal implements BackupServico {
   constructor(
     private readonly armazenamento: Armazenamento,
     private readonly config: ConfigRepositorio,
+    private readonly clientes: ColecaoLocal<Cliente>,
+    private readonly propostas: ColecaoLocal<Proposta>,
   ) {}
 
   async exportar(): Promise<string> {
@@ -69,7 +135,11 @@ class BackupLocal implements BackupServico {
       app: 'consorcio',
       versao: VERSAO_BACKUP,
       exportadoEm: new Date().toISOString(),
-      dados: { config: await this.config.obter() },
+      dados: {
+        config: await this.config.obter(),
+        clientes: await this.clientes.listar(),
+        propostas: await this.propostas.listar(),
+      },
     }
     return JSON.stringify(backup, null, 2)
   }
@@ -88,7 +158,10 @@ class BackupLocal implements BackupServico {
     if (!resultado.success) {
       throw new ErroBackup('O arquivo não é um backup válido deste sistema.')
     }
-    await this.config.salvar(resultado.data.dados.config)
+    const { config, clientes, propostas } = resultado.data.dados
+    await this.config.salvar(config)
+    if (clientes) this.clientes.gravar(clientes)
+    if (propostas) this.propostas.gravar(propostas)
   }
 
   async restaurarExemplo(): Promise<void> {
@@ -98,9 +171,17 @@ class BackupLocal implements BackupServico {
 
 export function criarRepositoriosLocais(armazenamento: Armazenamento): Repositorios {
   const config = new ConfigLocal(armazenamento)
+  const clientes = new ColecaoLocal(armazenamento, CHAVES.clientes, clienteSchema, () =>
+    clientesExemplo(),
+  )
+  const propostas = new PropostasLocal(armazenamento, CHAVES.propostas, propostaSchema, () =>
+    propostasExemplo(),
+  )
   return {
     config,
     usuarios: new UsuariosSeed(),
-    backup: new BackupLocal(armazenamento, config),
+    clientes,
+    propostas,
+    backup: new BackupLocal(armazenamento, config, clientes, propostas),
   }
 }

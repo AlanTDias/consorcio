@@ -20,7 +20,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run build && npx vite preview --port 4173 --strictPort --base /consorcio/',
     url: 'http://localhost:4173/consorcio/',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 180_000,
   },
 })

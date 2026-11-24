@@ -147,6 +147,29 @@ describe('consórcio: demais regras', () => {
     expect(s.evolucao.at(-1)?.saldoFinal).toBe(0)
   })
 
+  it('com reajuste, o custo continua sendo taxas + seguro e nunca fica negativo', () => {
+    const s = simularConsorcio({
+      ...base(520_000, 240),
+      seguroMensalPct: 0.04,
+      reajusteAnualPct: 5.5,
+    })
+    expect(s.totalReajuste).toBeGreaterThan(0)
+    expect(s.custoTotal).toBe(r(104_000) + r(5_200) + s.totalSeguro)
+    expect(s.custoPct).toBeGreaterThan(0)
+  })
+
+  it('custo percentual é sobre a carta contratada, mesmo com lance embutido', () => {
+    const s = simularConsorcio({
+      ...base(300_000, 200),
+      contemplacao: {
+        mes: 12,
+        tipo: 'lance',
+        lance: { tipo: 'embutido', pct: 25, efeito: 'parcela' },
+      },
+    })
+    expect(s.custoPct).toBe(17.67)
+  })
+
   it('contemplação por sorteio fixa o crédito na carta vigente no mês', () => {
     const s = simularConsorcio({
       ...base(80_000, 80),

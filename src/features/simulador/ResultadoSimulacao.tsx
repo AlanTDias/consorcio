@@ -37,6 +37,7 @@ export function ResultadoSimulacao({
         <Indicador
           rotulo="Crédito líquido"
           valor={formatarMoeda(resultado.creditoLiquido)}
+          nota={`no mês ${resultado.mesCredito}${parametros.reajusteAnualPct !== null ? ', corrigido' : ''}`}
           testId="credito-liquido"
         />
         <Indicador
@@ -45,9 +46,9 @@ export function ResultadoSimulacao({
           testId="total-pago"
         />
         <Indicador
-          rotulo="Custo total"
+          rotulo="Custo total (taxas e seguro)"
           valor={formatarMoeda(resultado.custoTotal)}
-          nota={`${formatarPct(resultado.custoPct)} sobre o crédito`}
+          nota={`${formatarPct(resultado.custoPct)} sobre a carta`}
           testId="custo-total"
         />
         <Indicador

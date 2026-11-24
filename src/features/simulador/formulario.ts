@@ -1,22 +1,8 @@
-import { z } from 'zod'
-import type { Categoria, Config } from '../../data/esquemas'
+import type { Categoria, Config, FormularioSimulacao } from '../../data/esquemas'
 import type { ParametrosConsorcio } from '../../domain/consorcio'
 import { reaisParaCentavos } from '../../domain/dinheiro'
 
-export const formularioSimulacaoSchema = z.object({
-  categoriaId: z.string().min(1).max(30),
-  carta: z.number().int().min(0).max(100_000_000),
-  prazo: z.number(),
-  seguro: z.boolean(),
-  reajuste: z.boolean(),
-  parcelaReduzida: z.boolean(),
-  contemplacao: z.enum(['nenhuma', 'sorteio', 'lance']),
-  mesContemplacao: z.number(),
-  tipoLance: z.enum(['livre', 'embutido', 'fixo']),
-  pctLance: z.number(),
-  efeitoLance: z.enum(['parcela', 'prazo']),
-})
-export type FormularioSimulacao = z.infer<typeof formularioSimulacaoSchema>
+export type { FormularioSimulacao }
 export type ErrosFormulario = Partial<Record<keyof FormularioSimulacao, string>>
 
 const SUGESTAO: Record<string, { carta: number; prazo: number }> = {

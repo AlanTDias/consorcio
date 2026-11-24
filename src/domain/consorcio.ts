@@ -210,7 +210,7 @@ export function simularConsorcio(p: ParametrosConsorcio): ResultadoConsorcio {
   const totalDesembolsado = totalParcelas + totalSeguro + recursoProprio
   const cartaCredito = cartaNoCredito ?? carta
   const creditoLiquido = cartaCredito - (lance?.embutido ?? 0)
-  const custoTotal = totalDesembolsado - creditoLiquido
+  const custoTotal = valorAdm + valorFundoReserva + totalSeguro
   const primeira = evolucao[0]
   const ultimaLinha = evolucao[evolucao.length - 1]
 
@@ -233,7 +233,7 @@ export function simularConsorcio(p: ParametrosConsorcio): ResultadoConsorcio {
     cartaNoCredito: cartaCredito,
     creditoLiquido,
     custoTotal,
-    custoPct: razaoPct(custoTotal, creditoLiquido),
+    custoPct: razaoPct(custoTotal, p.carta),
     prazoEfetivo: evolucao.length,
     evolucao,
   }

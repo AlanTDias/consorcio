@@ -95,6 +95,7 @@
 
 .topo-identidade {
   display: grid;
+  min-width: 0;
   text-align: right;
   font-size: 0.9rem;
   line-height: 1.3;
@@ -181,6 +182,13 @@
 
   .topo-identidade span {
     display: none;
+  }
+
+  .topo-identidade strong {
+    max-width: 38vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .conteudo {

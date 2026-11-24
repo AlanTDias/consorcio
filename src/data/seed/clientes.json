@@ -1,0 +1,479 @@
+[
+  {
+    "id": "c-01",
+    "nome": "Beatriz Andrade",
+    "email": "beatriz.andrade@exemplo.test",
+    "telefone": "(11) 90000-0001",
+    "cpf": "000.000.001-00",
+    "categoriaInteresse": "imovel",
+    "etapa": "venda",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-150",
+    "atualizadoEm": "@mes:0:3",
+    "anotacoes": [
+      {
+        "id": "a-01-1",
+        "data": "@dias:-148",
+        "autorId": "u-vend-1",
+        "texto": "Primeiro contato feito. Prefere falar por mensagem no fim da tarde."
+      }
+    ],
+    "historico": [
+      {
+        "id": "h-01-1",
+        "data": "@dias:-150",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0001",
+        "data": "@mes:0:3:-7",
+        "descricao": "Proposta P-@ano-0001 criada"
+      },
+      {
+        "id": "h-v-0001",
+        "data": "@mes:0:3",
+        "descricao": "Proposta P-@ano-0001 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-02",
+    "nome": "Rafael Costa",
+    "email": "rafael.costa@exemplo.test",
+    "telefone": "(11) 90000-0002",
+    "cpf": "000.000.002-00",
+    "categoriaInteresse": "veiculo",
+    "etapa": "venda",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-148",
+    "atualizadoEm": "@mes:0:8",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-02-1",
+        "data": "@dias:-148",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0002",
+        "data": "@mes:0:8:-7",
+        "descricao": "Proposta P-@ano-0002 criada"
+      },
+      {
+        "id": "h-v-0002",
+        "data": "@mes:0:8",
+        "descricao": "Proposta P-@ano-0002 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-03",
+    "nome": "Larissa Nogueira",
+    "email": "larissa.nogueira@exemplo.test",
+    "telefone": "(11) 90000-0003",
+    "cpf": "000.000.003-00",
+    "categoriaInteresse": "servico",
+    "etapa": "venda",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-146",
+    "atualizadoEm": "@mes:0:12",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-03-1",
+        "data": "@dias:-146",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0003",
+        "data": "@mes:0:12:-7",
+        "descricao": "Proposta P-@ano-0003 criada"
+      },
+      {
+        "id": "h-v-0003",
+        "data": "@mes:0:12",
+        "descricao": "Proposta P-@ano-0003 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-04",
+    "nome": "Thiago Barros",
+    "email": "thiago.barros@exemplo.test",
+    "telefone": "(11) 90000-0004",
+    "cpf": "000.000.004-00",
+    "categoriaInteresse": "imovel",
+    "etapa": "venda",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-144",
+    "atualizadoEm": "@mes:-1:14",
+    "anotacoes": [
+      {
+        "id": "a-04-1",
+        "data": "@dias:-142",
+        "autorId": "u-vend-1",
+        "texto": "Primeiro contato feito. Prefere falar por mensagem no fim da tarde."
+      }
+    ],
+    "historico": [
+      {
+        "id": "h-04-1",
+        "data": "@dias:-144",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0006",
+        "data": "@mes:-1:14:-7",
+        "descricao": "Proposta P-@ano-0006 criada"
+      },
+      {
+        "id": "h-v-0006",
+        "data": "@mes:-1:14",
+        "descricao": "Proposta P-@ano-0006 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-05",
+    "nome": "Camila Freitas",
+    "email": "camila.freitas@exemplo.test",
+    "telefone": "(11) 90000-0005",
+    "cpf": "000.000.005-00",
+    "categoriaInteresse": "veiculo",
+    "etapa": "venda",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-142",
+    "atualizadoEm": "@mes:-1:22",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-05-1",
+        "data": "@dias:-142",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0007",
+        "data": "@mes:-1:22:-7",
+        "descricao": "Proposta P-@ano-0007 criada"
+      },
+      {
+        "id": "h-v-0007",
+        "data": "@mes:-1:22",
+        "descricao": "Proposta P-@ano-0007 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-06",
+    "nome": "Eduardo Pires",
+    "email": "eduardo.pires@exemplo.test",
+    "telefone": "(11) 90000-0006",
+    "cpf": "000.000.006-00",
+    "categoriaInteresse": "imovel",
+    "etapa": "proposta",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-140",
+    "atualizadoEm": "@dias:-11",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-06-1",
+        "data": "@dias:-140",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0010",
+        "data": "@dias:-11",
+        "descricao": "Proposta P-@ano-0010 criada"
+      }
+    ]
+  },
+  {
+    "id": "c-07",
+    "nome": "Fernanda Lopes",
+    "email": "fernanda.lopes@exemplo.test",
+    "telefone": "(11) 90000-0007",
+    "cpf": "000.000.007-00",
+    "categoriaInteresse": "servico",
+    "etapa": "lead",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-138",
+    "atualizadoEm": "@dias:-138",
+    "anotacoes": [
+      {
+        "id": "a-07-1",
+        "data": "@dias:-136",
+        "autorId": "u-vend-1",
+        "texto": "Primeiro contato feito. Prefere falar por mensagem no fim da tarde."
+      }
+    ],
+    "historico": [
+      {
+        "id": "h-07-1",
+        "data": "@dias:-138",
+        "descricao": "Cliente cadastrado"
+      }
+    ]
+  },
+  {
+    "id": "c-08",
+    "nome": "Gustavo Teixeira",
+    "email": "gustavo.teixeira@exemplo.test",
+    "telefone": "(11) 90000-0008",
+    "cpf": "000.000.008-00",
+    "categoriaInteresse": "veiculo",
+    "etapa": "proposta",
+    "vendedorId": "u-vend-1",
+    "criadoEm": "@dias:-136",
+    "atualizadoEm": "@dias:-9",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-08-1",
+        "data": "@dias:-136",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0012",
+        "data": "@dias:-9",
+        "descricao": "Proposta P-@ano-0012 criada"
+      }
+    ]
+  },
+  {
+    "id": "c-09",
+    "nome": "Helena Duarte",
+    "email": "helena.duarte@exemplo.test",
+    "telefone": "(11) 90000-0009",
+    "cpf": "000.000.009-00",
+    "categoriaInteresse": "imovel",
+    "etapa": "venda",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-134",
+    "atualizadoEm": "@mes:0:5",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-09-1",
+        "data": "@dias:-134",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0004",
+        "data": "@mes:0:5:-7",
+        "descricao": "Proposta P-@ano-0004 criada"
+      },
+      {
+        "id": "h-v-0004",
+        "data": "@mes:0:5",
+        "descricao": "Proposta P-@ano-0004 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-10",
+    "nome": "Igor Martins",
+    "email": "igor.martins@exemplo.test",
+    "telefone": "(11) 90000-0010",
+    "cpf": "000.000.010-00",
+    "categoriaInteresse": "veiculo",
+    "etapa": "venda",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-132",
+    "atualizadoEm": "@mes:0:10",
+    "anotacoes": [
+      {
+        "id": "a-10-1",
+        "data": "@dias:-130",
+        "autorId": "u-vend-2",
+        "texto": "Primeiro contato feito. Prefere falar por mensagem no fim da tarde."
+      }
+    ],
+    "historico": [
+      {
+        "id": "h-10-1",
+        "data": "@dias:-132",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0005",
+        "data": "@mes:0:10:-7",
+        "descricao": "Proposta P-@ano-0005 criada"
+      },
+      {
+        "id": "h-v-0005",
+        "data": "@mes:0:10",
+        "descricao": "Proposta P-@ano-0005 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-11",
+    "nome": "Juliana Rocha",
+    "email": "juliana.rocha@exemplo.test",
+    "telefone": "(11) 90000-0011",
+    "cpf": "000.000.011-00",
+    "categoriaInteresse": "imovel",
+    "etapa": "venda",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-130",
+    "atualizadoEm": "@mes:-1:9",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-11-1",
+        "data": "@dias:-130",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0008",
+        "data": "@mes:-1:9:-7",
+        "descricao": "Proposta P-@ano-0008 criada"
+      },
+      {
+        "id": "h-v-0008",
+        "data": "@mes:-1:9",
+        "descricao": "Proposta P-@ano-0008 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-12",
+    "nome": "Leonardo Campos",
+    "email": "leonardo.campos@exemplo.test",
+    "telefone": "(11) 90000-0012",
+    "cpf": "000.000.012-00",
+    "categoriaInteresse": "servico",
+    "etapa": "proposta",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-128",
+    "atualizadoEm": "@dias:-8",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-12-1",
+        "data": "@dias:-128",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0013",
+        "data": "@dias:-8",
+        "descricao": "Proposta P-@ano-0013 criada"
+      }
+    ]
+  },
+  {
+    "id": "c-13",
+    "nome": "Mariana Vieira",
+    "email": "mariana.vieira@exemplo.test",
+    "telefone": "(11) 90000-0013",
+    "cpf": "000.000.013-00",
+    "categoriaInteresse": "veiculo",
+    "etapa": "venda",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-126",
+    "atualizadoEm": "@mes:-2:18",
+    "anotacoes": [
+      {
+        "id": "a-13-1",
+        "data": "@dias:-124",
+        "autorId": "u-vend-2",
+        "texto": "Primeiro contato feito. Prefere falar por mensagem no fim da tarde."
+      }
+    ],
+    "historico": [
+      {
+        "id": "h-13-1",
+        "data": "@dias:-126",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0009",
+        "data": "@mes:-2:18:-7",
+        "descricao": "Proposta P-@ano-0009 criada"
+      },
+      {
+        "id": "h-v-0009",
+        "data": "@mes:-2:18",
+        "descricao": "Proposta P-@ano-0009 aceita"
+      }
+    ]
+  },
+  {
+    "id": "c-14",
+    "nome": "Nicolas Farias",
+    "email": "nicolas.farias@exemplo.test",
+    "telefone": "(11) 90000-0014",
+    "cpf": "000.000.014-00",
+    "categoriaInteresse": "imovel",
+    "etapa": "proposta",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-124",
+    "atualizadoEm": "@dias:-10",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-14-1",
+        "data": "@dias:-124",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0011",
+        "data": "@dias:-10",
+        "descricao": "Proposta P-@ano-0011 criada"
+      }
+    ]
+  },
+  {
+    "id": "c-15",
+    "nome": "Olívia Cardoso",
+    "email": "olivia.cardoso@exemplo.test",
+    "telefone": "(11) 90000-0015",
+    "cpf": "000.000.015-00",
+    "categoriaInteresse": "veiculo",
+    "etapa": "proposta",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-122",
+    "atualizadoEm": "@dias:-6",
+    "anotacoes": [],
+    "historico": [
+      {
+        "id": "h-15-1",
+        "data": "@dias:-122",
+        "descricao": "Cliente cadastrado"
+      },
+      {
+        "id": "h-p-0014",
+        "data": "@dias:-13",
+        "descricao": "Proposta P-@ano-0014 criada"
+      }
+    ]
+  },
+  {
+    "id": "c-16",
+    "nome": "Paulo Ramos",
+    "email": "paulo.ramos@exemplo.test",
+    "telefone": "(11) 90000-0016",
+    "cpf": "000.000.016-00",
+    "categoriaInteresse": "servico",
+    "etapa": "lead",
+    "vendedorId": "u-vend-2",
+    "criadoEm": "@dias:-120",
+    "atualizadoEm": "@dias:-120",
+    "anotacoes": [
+      {
+        "id": "a-16-1",
+        "data": "@dias:-118",
+        "autorId": "u-vend-2",
+        "texto": "Primeiro contato feito. Prefere falar por mensagem no fim da tarde."
+      }
+    ],
+    "historico": [
+      {
+        "id": "h-16-1",
+        "data": "@dias:-120",
+        "descricao": "Cliente cadastrado"
+      }
+    ]
+  }
+]

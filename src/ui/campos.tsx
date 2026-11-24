@@ -152,8 +152,8 @@ export function CampoSelecao<T extends string>({
   desabilitado,
 }: BaseCampo & {
   valor: T
-  opcoes: readonly { valor: T; rotulo: string }[]
-  aoMudar(valor: T): void
+  opcoes: readonly { valor: NoInfer<T>; rotulo: string }[]
+  aoMudar(valor: NoInfer<T>): void
 }) {
   const id = useId()
   return (
@@ -225,8 +225,8 @@ export function Segmentado<T extends string>({
 }: {
   rotulo: string
   valor: T
-  opcoes: readonly { valor: T; rotulo: string }[]
-  aoMudar(valor: T): void
+  opcoes: readonly { valor: NoInfer<T>; rotulo: string }[]
+  aoMudar(valor: NoInfer<T>): void
 }) {
   return (
     <fieldset className="segmentado">

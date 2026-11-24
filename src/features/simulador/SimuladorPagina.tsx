@@ -1,14 +1,15 @@
 import { useMemo, useState } from 'react'
-import { RotateCcw } from 'lucide-react'
-import { useConfig } from '../../contexto'
-import type { Config } from '../../data/esquemas'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { FilePlus2, RotateCcw } from 'lucide-react'
+import { podeAcessar } from '../../auth/permissoes'
+import { useAuth, useConfig } from '../../contexto'
+import { formularioSimulacaoSchema, type Config } from '../../data/esquemas'
 import { simularConsorcio } from '../../domain/consorcio'
 import { formatarPct } from '../../domain/dinheiro'
 import { CabecalhoPagina, CampoMoeda, CampoNumero, Interruptor, Segmentado } from '../../ui/campos'
 import {
   categoriaDe,
   formularioPadrao,
-  formularioSimulacaoSchema,
   indiceDaCategoria,
   montarParametros,
   validarFormulario,
@@ -40,6 +41,13 @@ export function SimuladorPagina() {
 }
 
 function Simulador({ config }: { config: Config }) {
+  const { sessao } = useAuth()
+  const navegar = useNavigate()
+  const local = useLocation()
+  const clienteId =
+    typeof (local.state as { clienteId?: unknown } | null)?.clienteId === 'string'
+      ? (local.state as { clienteId: string }).clienteId
+      : undefined
   const [form, setForm] = useState<FormularioSimulacao>(() => lerRascunho(config))
   const [verEvolucao, setVerEvolucao] = useState(false)
 
@@ -67,6 +75,7 @@ function Simulador({ config }: { config: Config }) {
   }, [form, config, valido])
 
   const precisaMes = form.contemplacao !== 'nenhuma' || form.parcelaReduzida
+  const podeGerarProposta = sessao ? podeAcessar(sessao.perfil, 'propostas') : false
 
   return (
     <section>
@@ -208,6 +217,18 @@ function Simulador({ config }: { config: Config }) {
           {simulacao ? (
             <>
               <ResultadoSimulacao {...simulacao} />
+              {podeGerarProposta && (
+                <button
+                  type="button"
+                  className="btn btn-primario"
+                  onClick={() =>
+                    navegar('/propostas/nova', { state: { formulario: form, clienteId } })
+                  }
+                >
+                  <FilePlus2 size={18} aria-hidden="true" />
+                  Gerar proposta
+                </button>
+              )}
             </>
           ) : (
             <p className="texto-secundario">Corrija os campos destacados para ver a simulação.</p>

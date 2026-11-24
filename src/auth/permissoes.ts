@@ -28,3 +28,7 @@ export function modulosPermitidos(perfil: Perfil): readonly Modulo[] {
 export function ehModulo(valor: string): valor is Modulo {
   return (modulos as readonly string[]).includes(valor)
 }
+
+export function podeVerTodos(perfil: Perfil): boolean {
+  return perfil !== 'Vendedor'
+}

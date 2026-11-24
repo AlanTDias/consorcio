@@ -5,6 +5,7 @@ import { empresaSchema, type Config, type Empresa } from '../../data/esquemas'
 import { ErroBackup, TAMANHO_MAXIMO_BACKUP } from '../../data/local/repositoriosLocais'
 import { Aviso, type Mensagem } from '../../ui/campos'
 import { mascararCnpj } from '../../ui/mascaras'
+import { MetasForm } from './MetasForm'
 import { ParametrosFinanceiros } from './ParametrosFinanceiros'
 import './configuracoes.css'
 
@@ -29,7 +30,7 @@ export function ConfiguracoesPagina() {
       <header className="cabecalho-pagina">
         <h1>Configurações</h1>
         <p className="texto-secundario">
-          Dados da empresa, taxas, categorias e cópia de segurança.
+          Dados da empresa, taxas, categorias, metas e cópia de segurança.
         </p>
       </header>
       <FormularioEmpresa
@@ -39,6 +40,7 @@ export function ConfiguracoesPagina() {
         aoMudarMensagem={setMensagemEmpresa}
       />
       <ParametrosFinanceiros key={versao} config={config} />
+      <MetasForm key={`metas-${versao}`} config={config} />
       <SecaoBackup
         aoRestaurar={() => {
           setMensagemEmpresa(null)

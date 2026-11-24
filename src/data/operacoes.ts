@@ -163,6 +163,18 @@ export async function mudarStatus(
       `Não é possível mudar de "${ROTULO_STATUS[proposta.status]}" para "${ROTULO_STATUS[status]}".`,
     )
   }
+  if (status === 'aceita' && grupoId) {
+    const grupo = await repos.grupos.obter(grupoId)
+    const vendidas = (await repos.propostas.listar()).filter(
+      (p) => p.grupoId === grupoId && p.status === 'aceita' && p.id !== proposta.id,
+    ).length
+    const semVaga =
+      !grupo ||
+      grupo.categoriaId !== proposta.categoriaId ||
+      grupo.status === 'encerrado' ||
+      grupo.cotasOcupadasIniciais + vendidas >= grupo.participantes
+    if (semVaga) throw new ErroOperacao('O grupo escolhido não tem vaga para esta categoria.')
+  }
   const agora = agoraIso()
   const final = status === 'aceita' || status === 'recusada'
   const salva = await repos.propostas.salvar({

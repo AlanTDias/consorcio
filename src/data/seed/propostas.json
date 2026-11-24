@@ -9,7 +9,7 @@
     "criadaEm": "@mes:0:3:-7",
     "atualizadaEm": "@mes:0:3",
     "fechadaEm": "@mes:0:3",
-    "grupoId": null,
+    "grupoId": "g-im-301",
     "formulario": {
       "categoriaId": "imovel",
       "carta": 300000,
@@ -21,7 +21,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 30000000,
@@ -45,7 +46,7 @@
     "criadaEm": "@mes:0:8:-7",
     "atualizadaEm": "@mes:0:8",
     "fechadaEm": "@mes:0:8",
-    "grupoId": null,
+    "grupoId": "g-ve-118",
     "formulario": {
       "categoriaId": "veiculo",
       "carta": 80000,
@@ -57,7 +58,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 8000000,
@@ -81,7 +83,7 @@
     "criadaEm": "@mes:0:12:-7",
     "atualizadaEm": "@mes:0:12",
     "fechadaEm": "@mes:0:12",
-    "grupoId": null,
+    "grupoId": "g-se-042",
     "formulario": {
       "categoriaId": "servico",
       "carta": 20000,
@@ -93,7 +95,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 2000000,
@@ -117,7 +120,7 @@
     "criadaEm": "@mes:0:5:-7",
     "atualizadaEm": "@mes:0:5",
     "fechadaEm": "@mes:0:5",
-    "grupoId": null,
+    "grupoId": "g-im-301",
     "formulario": {
       "categoriaId": "imovel",
       "carta": 450000,
@@ -129,7 +132,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 45000000,
@@ -153,7 +157,7 @@
     "criadaEm": "@mes:0:10:-7",
     "atualizadaEm": "@mes:0:10",
     "fechadaEm": "@mes:0:10",
-    "grupoId": null,
+    "grupoId": "g-ve-118",
     "formulario": {
       "categoriaId": "veiculo",
       "carta": 120000,
@@ -165,7 +169,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 12000000,
@@ -189,7 +194,7 @@
     "criadaEm": "@mes:-1:14:-7",
     "atualizadaEm": "@mes:-1:14",
     "fechadaEm": "@mes:-1:14",
-    "grupoId": null,
+    "grupoId": "g-im-301",
     "formulario": {
       "categoriaId": "imovel",
       "carta": 250000,
@@ -201,7 +206,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 25000000,
@@ -225,7 +231,7 @@
     "criadaEm": "@mes:-1:22:-7",
     "atualizadaEm": "@mes:-1:22",
     "fechadaEm": "@mes:-1:22",
-    "grupoId": null,
+    "grupoId": "g-ve-118",
     "formulario": {
       "categoriaId": "veiculo",
       "carta": 60000,
@@ -237,7 +243,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 6000000,
@@ -261,7 +268,7 @@
     "criadaEm": "@mes:-1:9:-7",
     "atualizadaEm": "@mes:-1:9",
     "fechadaEm": "@mes:-1:9",
-    "grupoId": null,
+    "grupoId": "g-im-301",
     "formulario": {
       "categoriaId": "imovel",
       "carta": 380000,
@@ -273,7 +280,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 38000000,
@@ -305,7 +313,7 @@
     "criadaEm": "@mes:-2:18:-7",
     "atualizadaEm": "@mes:-2:18",
     "fechadaEm": "@mes:-2:18",
-    "grupoId": null,
+    "grupoId": "g-ve-118",
     "formulario": {
       "categoriaId": "veiculo",
       "carta": 95000,
@@ -317,7 +325,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 9500000,
@@ -353,7 +362,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 52000000,
@@ -389,7 +399,8 @@
       "mesContemplacao": 24,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 28000000,
@@ -428,7 +439,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 7000000,
@@ -464,7 +476,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 3000000,
@@ -500,7 +513,8 @@
       "mesContemplacao": 12,
       "tipoLance": "embutido",
       "pctLance": 25,
-      "efeitoLance": "parcela"
+      "efeitoLance": "parcela",
+      "grupoId": ""
     },
     "parametros": {
       "carta": 11000000,

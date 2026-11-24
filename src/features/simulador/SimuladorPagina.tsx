@@ -6,18 +6,30 @@ import { useAuth, useConfig } from '../../contexto'
 import { formularioSimulacaoSchema, type Config } from '../../data/esquemas'
 import { simularConsorcio } from '../../domain/consorcio'
 import { formatarPct } from '../../domain/dinheiro'
-import { CabecalhoPagina, CampoMoeda, CampoNumero, Interruptor, Segmentado } from '../../ui/campos'
+import type { Repositorios } from '../../data/repositorios'
+import {
+  CabecalhoPagina,
+  CampoMoeda,
+  CampoNumero,
+  CampoSelecao,
+  Interruptor,
+  Segmentado,
+} from '../../ui/campos'
+import { useCarregar } from '../../ui/dados'
 import {
   categoriaDe,
   formularioPadrao,
   indiceDaCategoria,
   montarParametros,
+  pctLanceEfetivo,
   validarFormulario,
   valoresDaCategoria,
   type FormularioSimulacao,
 } from './formulario'
 import { ResultadoSimulacao, TabelaEvolucao } from './ResultadoSimulacao'
 import './simulador.css'
+
+const listarGrupos = (r: Repositorios) => r.grupos.listar()
 
 const CHAVE_RASCUNHO = 'consorcio:v1:simulador'
 
@@ -65,6 +77,10 @@ function Simulador({ config }: { config: Config }) {
 
   const categoria = categoriaDe(config, form.categoriaId)
   const indice = indiceDaCategoria(config, categoria)
+  const grupos = useCarregar(listarGrupos).dados ?? []
+  const gruposDaCategoria = grupos.filter(
+    (g) => g.categoriaId === categoria.id && g.status !== 'encerrado',
+  )
   const erros = validarFormulario(form, config)
   const valido = Object.keys(erros).length === 0
 
@@ -104,7 +120,11 @@ function Simulador({ config }: { config: Config }) {
             valor={form.categoriaId}
             opcoes={config.categorias.map((c) => ({ valor: c.id, rotulo: c.nome }))}
             aoMudar={(id) =>
-              alterar({ categoriaId: id, ...valoresDaCategoria(categoriaDe(config, id)) })
+              alterar({
+                categoriaId: id,
+                grupoId: '',
+                ...valoresDaCategoria(categoriaDe(config, id)),
+              })
             }
           />
           <CampoMoeda
@@ -180,13 +200,37 @@ function Simulador({ config }: { config: Config }) {
                   { valor: 'embutido', rotulo: 'Embutido' },
                   { valor: 'fixo', rotulo: 'Fixo' },
                 ]}
-                aoMudar={(tipoLance) => alterar({ tipoLance })}
+                aoMudar={(tipoLance) => alterar({ tipoLance, grupoId: '' })}
               />
+              {form.tipoLance === 'fixo' && (
+                <CampoSelecao
+                  rotulo="Grupo"
+                  valor={form.grupoId}
+                  opcoes={[
+                    {
+                      valor: '',
+                      rotulo: `Padrão da categoria (${formatarPct(categoria.lanceFixoPct, 0)})`,
+                    },
+                    ...gruposDaCategoria.map((g) => ({
+                      valor: g.id,
+                      rotulo: `${g.codigo}: lance fixo de ${formatarPct(g.lanceFixoPct, 0)}`,
+                    })),
+                  ]}
+                  aoMudar={(grupoId) =>
+                    alterar({
+                      grupoId,
+                      pctLance:
+                        gruposDaCategoria.find((g) => g.id === grupoId)?.lanceFixoPct ??
+                        form.pctLance,
+                    })
+                  }
+                />
+              )}
               <CampoNumero
                 rotulo="Lance (% da carta)"
                 sufixo="%"
                 decimais
-                valor={form.tipoLance === 'fixo' ? categoria.lanceFixoPct : form.pctLance}
+                valor={pctLanceEfetivo(form, categoria)}
                 aoMudar={(pctLance) => alterar({ pctLance })}
                 desabilitado={form.tipoLance === 'fixo'}
                 erro={erros.pctLance}
@@ -194,7 +238,7 @@ function Simulador({ config }: { config: Config }) {
                   form.tipoLance === 'embutido'
                     ? `Até ${formatarPct(config.taxas.lanceEmbutidoMaxPct, 0)}; sai da própria carta`
                     : form.tipoLance === 'fixo'
-                      ? 'Percentual fixo da categoria'
+                      ? 'Definido pelo grupo ou pela categoria'
                       : 'Pago com recursos próprios'
                 }
                 testId="campo-lance"

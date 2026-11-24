@@ -47,5 +47,9 @@
       "cartaMax": 50000,
       "lanceFixoPct": 25
     }
+  ],
+  "metas": [
+    { "vendedorId": "u-vend-1", "mensal": 600000 },
+    { "vendedorId": "u-vend-2", "mensal": 600000 }
   ]
 }

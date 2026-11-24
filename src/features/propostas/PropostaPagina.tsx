@@ -1,15 +1,17 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, Check, FileDown, Send, X } from 'lucide-react'
+import { podeAcessar } from '../../auth/permissoes'
 import { useAuth, useConfig } from '../../contexto'
 import type { StatusProposta } from '../../data/esquemas'
+import { gruposComVaga } from '../../data/grupos'
 import { ErroOperacao, mudarStatus, podeVer, proximosStatus } from '../../data/operacoes'
 import type { Repositorios } from '../../data/repositorios'
 import { simularConsorcio } from '../../domain/consorcio'
-import { Aviso, CabecalhoPagina, type Mensagem } from '../../ui/campos'
+import { Aviso, CabecalhoPagina, CampoSelecao, type Mensagem } from '../../ui/campos'
 import { formatarData, formatarDataHora, useCarregar, useUsuarios } from '../../ui/dados'
 import { Carregando, EtiquetaStatus } from '../../ui/etiquetas'
-import { AcessoNegado } from '../emBreve/EmBreve'
+import { AcessoNegado } from '../acesso/AcessoNegado'
 import { ResultadoSimulacao, TabelaEvolucao } from '../simulador/ResultadoSimulacao'
 
 const ACOES: Record<
@@ -27,7 +29,8 @@ export function PropostaPagina() {
     async (r: Repositorios) => {
       const proposta = await r.propostas.obter(id)
       const cliente = proposta ? await r.clientes.obter(proposta.clienteId) : undefined
-      return { proposta, cliente }
+      const [grupos, propostas] = await Promise.all([r.grupos.listar(), r.propostas.listar()])
+      return { proposta, cliente, grupos, propostas }
     },
     [id],
   )
@@ -38,6 +41,7 @@ export function PropostaPagina() {
   const [mensagem, setMensagem] = useState<Mensagem>(null)
   const [verEvolucao, setVerEvolucao] = useState(false)
   const [gerando, setGerando] = useState(false)
+  const [grupoEscolhido, setGrupoEscolhido] = useState<string | null>(null)
 
   const resultado = useMemo(
     () => (dados?.proposta ? simularConsorcio(dados.proposta.parametros) : null),
@@ -45,7 +49,7 @@ export function PropostaPagina() {
   )
 
   if (!dados || !sessao || !config) return <Carregando />
-  const { proposta, cliente } = dados
+  const { proposta, cliente, grupos, propostas } = dados
   if (!proposta || !resultado) {
     return (
       <section className="card estado-vazio">
@@ -57,13 +61,25 @@ export function PropostaPagina() {
     )
   }
   if (!podeVer(sessao, proposta)) return <AcessoNegado />
+  const comVaga = gruposComVaga(grupos, propostas, proposta.categoriaId)
+  const sugerido = comVaga.some((g) => g.id === proposta.formulario.grupoId)
+    ? proposta.formulario.grupoId
+    : (comVaga[0]?.id ?? '')
+  const grupoVenda = grupoEscolhido ?? sugerido
+  const grupoAtual = grupos.find((g) => g.id === proposta.grupoId)
+  const podeVerGrupos = podeAcessar(sessao.perfil, 'grupos')
   const vendedor = usuarios.find((u) => u.id === proposta.vendedorId)?.nome ?? '—'
   const categoria = config.categorias.find((c) => c.id === proposta.categoriaId)?.nome ?? ''
 
   async function alterar(status: StatusProposta) {
     if (!proposta) return
     try {
-      await mudarStatus(repositorios, proposta, status)
+      await mudarStatus(
+        repositorios,
+        proposta,
+        status,
+        status === 'aceita' ? grupoVenda || null : proposta.grupoId,
+      )
       setMensagem({ tipo: 'sucesso', texto: 'Status atualizado.' })
       recarregar()
     } catch (erro) {
@@ -120,6 +136,30 @@ export function PropostaPagina() {
                 <span className="texto-secundario">em {formatarDataHora(proposta.fechadaEm)}</span>
               )}
             </div>
+            {grupoAtual && (
+              <p>
+                Grupo{' '}
+                {podeVerGrupos ? (
+                  <Link to={`/grupos/${grupoAtual.id}`}>{grupoAtual.codigo}</Link>
+                ) : (
+                  grupoAtual.codigo
+                )}
+              </p>
+            )}
+            {proximosStatus(proposta.status).includes('aceita') && (
+              <CampoSelecao
+                rotulo="Grupo da venda"
+                valor={grupoVenda}
+                opcoes={[
+                  { valor: '', rotulo: 'Definir depois' },
+                  ...comVaga.map((g) => ({
+                    valor: g.id,
+                    rotulo: `Grupo ${g.codigo} (${g.prazoMeses} meses)`,
+                  })),
+                ]}
+                aoMudar={setGrupoEscolhido}
+              />
+            )}
             {proximosStatus(proposta.status).length > 0 ? (
               <div className="acoes">
                 {proximosStatus(proposta.status).map((s) => {

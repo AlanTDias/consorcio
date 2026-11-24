@@ -1,0 +1,131 @@
+[
+  {
+    "id": "g-im-301",
+    "codigo": "IM-301",
+    "categoriaId": "imovel",
+    "prazoMeses": 200,
+    "participantes": 300,
+    "cotasOcupadasIniciais": 236,
+    "lanceFixoPct": 30,
+    "inicio": "@mes:-4:10",
+    "status": "andamento",
+    "assembleias": [
+      {
+        "id": "as-301-1",
+        "numero": 1,
+        "data": "@mes:-3:15",
+        "contempladosSorteio": 2,
+        "contempladosLance": 3,
+        "maiorLancePct": 48.5,
+        "menorLancePct": 31.2
+      },
+      {
+        "id": "as-301-2",
+        "numero": 2,
+        "data": "@mes:-2:15",
+        "contempladosSorteio": 2,
+        "contempladosLance": 4,
+        "maiorLancePct": 45,
+        "menorLancePct": 29.8
+      },
+      {
+        "id": "as-301-3",
+        "numero": 3,
+        "data": "@mes:-1:15",
+        "contempladosSorteio": 2,
+        "contempladosLance": 4,
+        "maiorLancePct": 52.1,
+        "menorLancePct": 30
+      }
+    ]
+  },
+  {
+    "id": "g-im-305",
+    "codigo": "IM-305",
+    "categoriaId": "imovel",
+    "prazoMeses": 240,
+    "participantes": 500,
+    "cotasOcupadasIniciais": 118,
+    "lanceFixoPct": 25,
+    "inicio": "@mes:1:10",
+    "status": "formacao",
+    "assembleias": []
+  },
+  {
+    "id": "g-ve-118",
+    "codigo": "VE-118",
+    "categoriaId": "veiculo",
+    "prazoMeses": 80,
+    "participantes": 400,
+    "cotasOcupadasIniciais": 349,
+    "lanceFixoPct": 30,
+    "inicio": "@mes:-6:5",
+    "status": "andamento",
+    "assembleias": [
+      {
+        "id": "as-118-1",
+        "numero": 4,
+        "data": "@mes:-2:20",
+        "contempladosSorteio": 3,
+        "contempladosLance": 5,
+        "maiorLancePct": 41,
+        "menorLancePct": 27.5
+      },
+      {
+        "id": "as-118-2",
+        "numero": 5,
+        "data": "@mes:-1:20",
+        "contempladosSorteio": 3,
+        "contempladosLance": 6,
+        "maiorLancePct": 44.2,
+        "menorLancePct": 28
+      }
+    ]
+  },
+  {
+    "id": "g-ve-120",
+    "codigo": "VE-120",
+    "categoriaId": "veiculo",
+    "prazoMeses": 60,
+    "participantes": 250,
+    "cotasOcupadasIniciais": 64,
+    "lanceFixoPct": 20,
+    "inicio": "@mes:2:5",
+    "status": "formacao",
+    "assembleias": []
+  },
+  {
+    "id": "g-se-042",
+    "codigo": "SE-042",
+    "categoriaId": "servico",
+    "prazoMeses": 40,
+    "participantes": 200,
+    "cotasOcupadasIniciais": 186,
+    "lanceFixoPct": 25,
+    "inicio": "@mes:-8:12",
+    "status": "andamento",
+    "assembleias": [
+      {
+        "id": "as-042-1",
+        "numero": 8,
+        "data": "@mes:-1:25",
+        "contempladosSorteio": 1,
+        "contempladosLance": 3,
+        "maiorLancePct": 38,
+        "menorLancePct": 22.4
+      }
+    ]
+  },
+  {
+    "id": "g-se-031",
+    "codigo": "SE-031",
+    "categoriaId": "servico",
+    "prazoMeses": 36,
+    "participantes": 150,
+    "cotasOcupadasIniciais": 150,
+    "lanceFixoPct": 25,
+    "inicio": "@mes:-40:3",
+    "status": "encerrado",
+    "assembleias": []
+  }
+]

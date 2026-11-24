@@ -57,11 +57,18 @@ export const taxasSchema = z.object({
 })
 export type Taxas = z.infer<typeof taxasSchema>
 
+export const metaSchema = z.object({
+  vendedorId: z.string().regex(/^[a-z0-9-]{2,40}$/),
+  mensal: z.number().int().min(0).max(1_000_000_000),
+})
+export type Meta = z.infer<typeof metaSchema>
+
 export const configSchema = z.object({
   empresa: empresaSchema,
   taxas: taxasSchema,
   indices: z.array(indiceSchema).min(1).max(20),
   categorias: z.array(categoriaSchema).min(1).max(20),
+  metas: z.array(metaSchema).max(100).default([]),
 })
 export type Config = z.infer<typeof configSchema>
 
@@ -77,6 +84,7 @@ export const formularioSimulacaoSchema = z.object({
   tipoLance: z.enum(['livre', 'embutido', 'fixo']),
   pctLance: z.number(),
   efeitoLance: z.enum(['parcela', 'prazo']),
+  grupoId: z.string().max(60).default(''),
 })
 export type FormularioSimulacao = z.infer<typeof formularioSimulacaoSchema>
 
@@ -168,7 +176,40 @@ export const propostaSchema = z.object({
 })
 export type Proposta = z.infer<typeof propostaSchema>
 
-export const VERSAO_BACKUP = 2
+export const statusGrupo = ['formacao', 'andamento', 'encerrado'] as const
+export type StatusGrupo = (typeof statusGrupo)[number]
+
+const pctLanceApurado = z.number().finite().min(0).max(100).nullable()
+
+export const assembleiaSchema = z.object({
+  id,
+  numero: z.number().int().min(1).max(500),
+  data,
+  contempladosSorteio: z.number().int().min(0).max(1000),
+  contempladosLance: z.number().int().min(0).max(1000),
+  maiorLancePct: pctLanceApurado,
+  menorLancePct: pctLanceApurado,
+})
+export type Assembleia = z.infer<typeof assembleiaSchema>
+
+export const grupoSchema = z.object({
+  id,
+  codigo: z
+    .string()
+    .trim()
+    .regex(/^[A-Z]{2}-\d{3}$/, 'Use o formato IM-301'),
+  categoriaId: z.string().min(1).max(30),
+  prazoMeses: z.number().int().min(1).max(420),
+  participantes: z.number().int().min(1).max(5000),
+  cotasOcupadasIniciais: z.number().int().min(0).max(5000),
+  lanceFixoPct: z.number().finite().min(1).max(100),
+  inicio: data,
+  status: z.enum(statusGrupo),
+  assembleias: z.array(assembleiaSchema).max(420),
+})
+export type Grupo = z.infer<typeof grupoSchema>
+
+export const VERSAO_BACKUP = 3
 
 export const backupSchema = z.object({
   app: z.literal('consorcio'),
@@ -178,6 +219,7 @@ export const backupSchema = z.object({
     config: configSchema,
     clientes: z.array(clienteSchema).max(5000).optional(),
     propostas: z.array(propostaSchema).max(5000).optional(),
+    grupos: z.array(grupoSchema).max(1000).optional(),
   }),
 })
 export type Backup = z.infer<typeof backupSchema>

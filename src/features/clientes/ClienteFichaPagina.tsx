@@ -10,7 +10,7 @@ import { formatarMoeda } from '../../domain/dinheiro'
 import { CabecalhoPagina, CampoSelecao, CampoTexto } from '../../ui/campos'
 import { formatarData, formatarDataHora, useCarregar, useUsuarios } from '../../ui/dados'
 import { Carregando, EtiquetaEtapa, EtiquetaStatus } from '../../ui/etiquetas'
-import { AcessoNegado } from '../emBreve/EmBreve'
+import { AcessoNegado } from '../acesso/AcessoNegado'
 import { NaoEncontrado } from './ClienteFormPagina'
 
 export function ClienteFichaPagina() {

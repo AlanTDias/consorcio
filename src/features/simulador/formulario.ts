@@ -44,11 +44,13 @@ export function formularioPadrao(config: Config): FormularioSimulacao {
     tipoLance: 'embutido',
     pctLance: 25,
     efeitoLance: 'parcela',
+    grupoId: '',
   }
 }
 
 export function pctLanceEfetivo(f: FormularioSimulacao, categoria: Categoria): number {
-  return f.tipoLance === 'fixo' ? categoria.lanceFixoPct : f.pctLance
+  if (f.tipoLance !== 'fixo') return f.pctLance
+  return f.grupoId ? f.pctLance : categoria.lanceFixoPct
 }
 
 const formatoReais = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 })

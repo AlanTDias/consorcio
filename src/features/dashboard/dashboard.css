@@ -1,0 +1,67 @@
+.painel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.painel h2 {
+  font-size: 1.05rem;
+}
+
+.lista-barras {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-barras li {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lista-barras-texto {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.lista-barras-texto strong {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.lista-barras .texto-secundario {
+  font-size: 0.82rem;
+}
+
+.barra-trilho {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--grafite-950);
+  overflow: hidden;
+}
+
+.barra-preenchida {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--prata);
+}
+
+.ranking li[data-eu='true'] .barra-preenchida {
+  background: var(--laranja);
+}
+
+.ranking li[data-eu='true'] .lista-barras-texto span::after {
+  content: ' (você)';
+  color: var(--prata-2);
+}
+
+.meta-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}

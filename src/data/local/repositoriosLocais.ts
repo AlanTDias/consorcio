@@ -4,12 +4,14 @@ import {
   backupSchema,
   clienteSchema,
   configSchema,
+  grupoSchema,
   propostaSchema,
   usuarioSchema,
   VERSAO_BACKUP,
   type Backup,
   type Cliente,
   type Config,
+  type Grupo,
   type Proposta,
   type Usuario,
 } from '../esquemas'
@@ -23,6 +25,7 @@ import type {
 } from '../repositorios'
 import seedClientes from '../seed/clientes.json'
 import seedConfig from '../seed/config.json'
+import seedGrupos from '../seed/grupos.json'
 import seedPropostas from '../seed/propostas.json'
 import seedUsuarios from '../seed/usuarios.json'
 import { materializarDatas } from '../seed/datas'
@@ -31,6 +34,7 @@ export const CHAVES = {
   config: 'consorcio:v1:config',
   clientes: 'consorcio:v1:clientes',
   propostas: 'consorcio:v1:propostas',
+  grupos: 'consorcio:v1:grupos',
 } as const
 
 export const TAMANHO_MAXIMO_BACKUP = 5 * 1024 * 1024
@@ -46,6 +50,10 @@ export function clientesExemplo(agora = new Date()): Cliente[] {
 
 export function propostasExemplo(agora = new Date()): Proposta[] {
   return propostaSchema.array().parse(materializarDatas(seedPropostas, agora))
+}
+
+export function gruposExemplo(agora = new Date()): Grupo[] {
+  return grupoSchema.array().parse(materializarDatas(seedGrupos, agora))
 }
 
 class ConfigLocal implements ConfigRepositorio {
@@ -128,6 +136,7 @@ class BackupLocal implements BackupServico {
     private readonly config: ConfigRepositorio,
     private readonly clientes: ColecaoLocal<Cliente>,
     private readonly propostas: ColecaoLocal<Proposta>,
+    private readonly grupos: ColecaoLocal<Grupo>,
   ) {}
 
   async exportar(): Promise<string> {
@@ -139,6 +148,7 @@ class BackupLocal implements BackupServico {
         config: await this.config.obter(),
         clientes: await this.clientes.listar(),
         propostas: await this.propostas.listar(),
+        grupos: await this.grupos.listar(),
       },
     }
     return JSON.stringify(backup, null, 2)
@@ -158,10 +168,11 @@ class BackupLocal implements BackupServico {
     if (!resultado.success) {
       throw new ErroBackup('O arquivo não é um backup válido deste sistema.')
     }
-    const { config, clientes, propostas } = resultado.data.dados
+    const { config, clientes, propostas, grupos } = resultado.data.dados
     await this.config.salvar(config)
     if (clientes) this.clientes.gravar(clientes)
     if (propostas) this.propostas.gravar(propostas)
+    if (grupos) this.grupos.gravar(grupos)
   }
 
   async restaurarExemplo(): Promise<void> {
@@ -177,11 +188,13 @@ export function criarRepositoriosLocais(armazenamento: Armazenamento): Repositor
   const propostas = new PropostasLocal(armazenamento, CHAVES.propostas, propostaSchema, () =>
     propostasExemplo(),
   )
+  const grupos = new ColecaoLocal(armazenamento, CHAVES.grupos, grupoSchema, () => gruposExemplo())
   return {
     config,
     usuarios: new UsuariosSeed(),
     clientes,
     propostas,
-    backup: new BackupLocal(armazenamento, config, clientes, propostas),
+    grupos,
+    backup: new BackupLocal(armazenamento, config, clientes, propostas, grupos),
   }
 }

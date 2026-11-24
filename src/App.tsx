@@ -5,9 +5,13 @@ import { ProvedorConfig, ProvedorServicos, useAuth, useConfig, type Servicos } f
 import { ClienteFichaPagina } from './features/clientes/ClienteFichaPagina'
 import { ClienteFormPagina } from './features/clientes/ClienteFormPagina'
 import { ClientesPagina } from './features/clientes/ClientesPagina'
+import { DashboardPagina } from './features/dashboard/DashboardPagina'
+import { GrupoFormPagina } from './features/grupos/GrupoFormPagina'
+import { GrupoPagina } from './features/grupos/GrupoPagina'
+import { GruposPagina } from './features/grupos/GruposPagina'
 import { ComparadorPagina } from './features/comparador/ComparadorPagina'
 import { ConfiguracoesPagina } from './features/configuracoes/ConfiguracoesPagina'
-import { AcessoNegado, EmBreve } from './features/emBreve/EmBreve'
+import { AcessoNegado } from './features/acesso/AcessoNegado'
 import { LoginPagina } from './features/login/LoginPagina'
 import { NovaPropostaPagina } from './features/propostas/NovaPropostaPagina'
 import { PropostaPagina } from './features/propostas/PropostaPagina'
@@ -22,13 +26,17 @@ const SUBROTAS: { modulo: Modulo; caminho: string; pagina: () => ReactNode }[] =
   { modulo: 'clientes', caminho: '/clientes/:id/editar', pagina: () => <ClienteFormPagina /> },
   { modulo: 'propostas', caminho: '/propostas/nova', pagina: () => <NovaPropostaPagina /> },
   { modulo: 'propostas', caminho: '/propostas/:id', pagina: () => <PropostaPagina /> },
+  { modulo: 'grupos', caminho: '/grupos/novo', pagina: () => <GrupoFormPagina /> },
+  { modulo: 'grupos', caminho: '/grupos/:id', pagina: () => <GrupoPagina /> },
 ]
 
-const PAGINAS: Partial<Record<Modulo, () => ReactNode>> = {
+const PAGINAS: Record<Modulo, () => ReactNode> = {
+  dashboard: () => <DashboardPagina />,
   simulador: () => <SimuladorPagina />,
   comparador: () => <ComparadorPagina />,
   clientes: () => <ClientesPagina />,
   propostas: () => <PropostasPagina />,
+  grupos: () => <GruposPagina />,
   configuracoes: () => <ConfiguracoesPagina />,
 }
 
@@ -57,15 +65,11 @@ function Rotas() {
       <Route path="/login" element={<LoginPagina nomeSistema={nome} />} />
       <Route element={<RotaProtegida />}>
         <Route element={<Layout nomeSistema={nome} />}>
-          {NAVEGACAO.map(({ modulo, rotulo, etapa }) => (
+          {NAVEGACAO.map(({ modulo }) => (
             <Route
               key={modulo}
               path={`/${modulo}`}
-              element={
-                <Permitido modulo={modulo}>
-                  {PAGINAS[modulo]?.() ?? <EmBreve titulo={rotulo} etapa={etapa} />}
-                </Permitido>
-              }
+              element={<Permitido modulo={modulo}>{PAGINAS[modulo]()}</Permitido>}
             />
           ))}
           {SUBROTAS.map(({ modulo, caminho, pagina }) => (

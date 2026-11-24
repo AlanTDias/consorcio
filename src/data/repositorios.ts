@@ -1,4 +1,4 @@
-import type { Cliente, Config, Proposta, Usuario } from './esquemas'
+import type { Cliente, Config, Grupo, Proposta, Usuario } from './esquemas'
 
 export interface ConfigRepositorio {
   obter(): Promise<Config>
@@ -32,5 +32,6 @@ export interface Repositorios {
   usuarios: UsuarioRepositorio
   clientes: Repositorio<Cliente>
   propostas: PropostaRepositorio
+  grupos: Repositorio<Grupo>
   backup: BackupServico
 }

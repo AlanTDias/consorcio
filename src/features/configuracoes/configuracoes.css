@@ -1,0 +1,25 @@
+.configuracoes {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.bloco-config {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.bloco-config h2 {
+  font-size: 1.1rem;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

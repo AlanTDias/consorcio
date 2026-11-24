@@ -1,0 +1,181 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.logo-nome {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--prata);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100dvh;
+}
+
+.lateral {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem 1rem;
+  background: var(--grafite-950);
+  border-right: 1px solid var(--borda);
+}
+
+.lateral-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.menu {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--raio-sm);
+  color: var(--prata);
+  text-decoration: none;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+}
+
+.menu-item:hover {
+  background: var(--grafite-800);
+}
+
+.menu-item.active {
+  background: var(--grafite-800);
+  border-left-color: var(--laranja);
+  color: var(--prata);
+}
+
+.menu-item.active svg {
+  color: var(--laranja);
+}
+
+.principal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--borda);
+  background: var(--grafite-900);
+}
+
+.topo-usuario {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topo-identidade {
+  display: grid;
+  text-align: right;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.conteudo {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.rodape {
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--borda);
+}
+
+.so-movel,
+.fundo-menu {
+  display: none;
+}
+
+.cabecalho-pagina {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1.75rem;
+}
+
+.cabecalho-pagina h1 {
+  font-size: 1.6rem;
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .so-movel {
+    display: inline-flex;
+  }
+
+  .some-movel {
+    display: none;
+  }
+
+  .lateral {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: min(280px, 85vw);
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+      transform 0.2s ease,
+      visibility 0.2s;
+  }
+
+  .app[data-menu-aberto='true'] .lateral {
+    transform: none;
+    visibility: visible;
+    box-shadow: var(--sombra);
+  }
+
+  .app[data-menu-aberto='true'] .fundo-menu {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgb(0 0 0 / 55%);
+  }
+
+  .topo {
+    padding: 0.6rem 1rem;
+    gap: 0.6rem;
+  }
+
+  .topo-identidade span {
+    display: none;
+  }
+
+  .conteudo {
+    padding: 1.5rem 1rem;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "empresa": {
+    "nomeSistema": "Consórcio",
+    "razaoSocial": "Empresa Exemplo de Consórcios Ltda. (fictícia)",
+    "cnpj": "00.000.000/0000-00",
+    "administradoraParceira": "Administradora Parceira Exemplo (fictícia)"
+  },
+  "taxas": {
+    "admAnualPct": 1,
+    "fundoReservaPct": 1,
+    "seguroMensalPct": 0.04,
+    "lanceEmbutidoMaxPct": 30,
+    "parcelaReduzidaPct": 70
+  },
+  "indices": [
+    { "codigo": "INCC", "nome": "INCC (projeção de exemplo)", "anualPct": 5.5 },
+    { "codigo": "IPCA", "nome": "IPCA (projeção de exemplo)", "anualPct": 4.5 }
+  ],
+  "categorias": [
+    {
+      "id": "imovel",
+      "nome": "Imóvel",
+      "indice": "INCC",
+      "prazoMinMeses": 60,
+      "prazoMaxMeses": 240,
+      "cartaMin": 50000,
+      "cartaMax": 1500000
+    },
+    {
+      "id": "veiculo",
+      "nome": "Veículo",
+      "indice": "IPCA",
+      "prazoMinMeses": 12,
+      "prazoMaxMeses": 100,
+      "cartaMin": 20000,
+      "cartaMax": 400000
+    },
+    {
+      "id": "servico",
+      "nome": "Serviço",
+      "indice": "IPCA",
+      "prazoMinMeses": 12,
+      "prazoMaxMeses": 60,
+      "cartaMin": 5000,
+      "cartaMax": 50000
+    }
+  ]
+}

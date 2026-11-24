@@ -1,0 +1,30 @@
+[
+  {
+    "id": "u-admin",
+    "nome": "Ana Ribeiro",
+    "email": "ana.admin@exemplo.test",
+    "perfil": "Administrador",
+    "senhaDemo": "demo123"
+  },
+  {
+    "id": "u-gestor",
+    "nome": "Carlos Mendes",
+    "email": "carlos.gestor@exemplo.test",
+    "perfil": "Gestor",
+    "senhaDemo": "demo123"
+  },
+  {
+    "id": "u-vend-1",
+    "nome": "Júlia Souza",
+    "email": "julia.vendas@exemplo.test",
+    "perfil": "Vendedor",
+    "senhaDemo": "demo123"
+  },
+  {
+    "id": "u-vend-2",
+    "nome": "Marcos Prado",
+    "email": "marcos.vendas@exemplo.test",
+    "perfil": "Vendedor",
+    "senhaDemo": "demo123"
+  }
+]

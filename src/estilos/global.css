@@ -1,0 +1,272 @@
+:root {
+  --grafite-950: #15181c;
+  --grafite-900: #1c1f24;
+  --grafite-800: #252930;
+  --prata: #c9cdd2;
+  --prata-2: #8e949b;
+  --laranja: #ff6a13;
+  --laranja-hover: #ff8133;
+  --erro: #ff7a70;
+  --sucesso: #7bd8a0;
+  --borda: rgb(201 205 210 / 14%);
+  --borda-forte: rgb(201 205 210 / 28%);
+  --raio: 12px;
+  --raio-sm: 8px;
+  --sombra: 0 24px 60px rgb(0 0 0 / 45%);
+  --fonte: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  color-scheme: dark;
+  font-family: var(--fonte);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--prata);
+  background: var(--grafite-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+  color: var(--prata);
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--prata);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.texto-secundario {
+  color: var(--prata-2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-sm);
+  background: transparent;
+  color: var(--prata);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    transform 0.1s;
+}
+
+.btn:hover {
+  background: var(--grafite-800);
+  border-color: var(--prata-2);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primario {
+  background: var(--laranja);
+  border-color: var(--laranja);
+  color: var(--grafite-900);
+}
+
+.btn-primario:hover {
+  background: var(--laranja-hover);
+  border-color: var(--laranja-hover);
+}
+
+.btn-bloco {
+  width: 100%;
+}
+
+.btn-icone {
+  min-width: 44px;
+  padding: 0.5rem;
+  border-color: transparent;
+}
+
+.campo {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.campo > label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.campo-entrada {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo-entrada > .icone-campo {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--prata-2);
+  pointer-events: none;
+}
+
+.entrada {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-sm);
+  background: var(--grafite-950);
+  transition: border-color 0.15s;
+}
+
+.entrada::placeholder {
+  color: var(--prata-2);
+}
+
+.entrada:hover {
+  border-color: var(--prata-2);
+}
+
+.entrada:focus {
+  outline: none;
+  border-color: var(--laranja);
+}
+
+.entrada[aria-invalid='true'] {
+  border-color: var(--erro);
+}
+
+.campo-entrada > .icone-campo + .entrada {
+  padding-left: 2.6rem;
+}
+
+.erro-campo {
+  font-size: 0.85rem;
+  color: var(--erro);
+}
+
+.alerta {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--raio-sm);
+  border: 1px solid;
+  font-size: 0.9rem;
+}
+
+.alerta > svg {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.alerta-erro {
+  border-color: rgb(255 122 112 / 45%);
+  background: rgb(255 122 112 / 8%);
+  color: var(--erro);
+}
+
+.alerta-sucesso {
+  border-color: rgb(123 216 160 / 45%);
+  background: rgb(123 216 160 / 8%);
+  color: var(--sucesso);
+}
+
+.alerta-aviso {
+  border-color: var(--borda-forte);
+  background: var(--grafite-800);
+  color: var(--prata);
+}
+
+.card {
+  background: var(--grafite-800);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+}
+
+.selo-demo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--prata);
+  white-space: nowrap;
+}
+
+.aviso-legal {
+  font-size: 0.8rem;
+  color: var(--prata-2);
+}
+
+.estado-vazio {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--prata-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

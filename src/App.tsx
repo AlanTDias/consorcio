@@ -2,11 +2,19 @@ import type { ReactNode } from 'react'
 import { HashRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { podeAcessar, type Modulo } from './auth/permissoes'
 import { ProvedorConfig, ProvedorServicos, useAuth, useConfig, type Servicos } from './contexto'
+import { ComparadorPagina } from './features/comparador/ComparadorPagina'
 import { ConfiguracoesPagina } from './features/configuracoes/ConfiguracoesPagina'
 import { AcessoNegado, EmBreve } from './features/emBreve/EmBreve'
 import { LoginPagina } from './features/login/LoginPagina'
+import { SimuladorPagina } from './features/simulador/SimuladorPagina'
 import { Layout } from './ui/Layout'
 import { NAVEGACAO } from './ui/navegacao'
+
+const PAGINAS: Partial<Record<Modulo, () => ReactNode>> = {
+  simulador: () => <SimuladorPagina />,
+  comparador: () => <ComparadorPagina />,
+  configuracoes: () => <ConfiguracoesPagina />,
+}
 
 function RotaProtegida() {
   const { sessao, carregando } = useAuth()
@@ -39,11 +47,7 @@ function Rotas() {
               path={`/${modulo}`}
               element={
                 <Permitido modulo={modulo}>
-                  {modulo === 'configuracoes' ? (
-                    <ConfiguracoesPagina />
-                  ) : (
-                    <EmBreve titulo={rotulo} etapa={etapa} />
-                  )}
+                  {PAGINAS[modulo]?.() ?? <EmBreve titulo={rotulo} etapa={etapa} />}
                 </Permitido>
               }
             />

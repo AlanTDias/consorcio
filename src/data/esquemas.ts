@@ -44,6 +44,7 @@ export const categoriaSchema = z.object({
   prazoMaxMeses: z.number().int().min(1).max(420),
   cartaMin: z.number().int().min(1000).max(100_000_000),
   cartaMax: z.number().int().min(1000).max(100_000_000),
+  lanceFixoPct: z.number().finite().min(1).max(100).default(30),
 })
 export type Categoria = z.infer<typeof categoriaSchema>
 

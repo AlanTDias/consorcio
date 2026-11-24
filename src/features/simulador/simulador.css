@@ -1,0 +1,63 @@
+.simulador {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.simulador .resultado {
+  position: sticky;
+  top: 1rem;
+}
+
+.resultado h2,
+.evolucao h2 {
+  font-size: 1.1rem;
+}
+
+.separador {
+  height: 1px;
+  background: var(--borda);
+}
+
+.destaque-parcela {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--raio-sm);
+  background: var(--grafite-900);
+  border-left: 3px solid var(--laranja);
+}
+
+.destaque-parcela strong {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  color: var(--prata);
+}
+
+.evolucao {
+  margin-top: 1.5rem;
+}
+
+.evolucao-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.tabela-evolucao {
+  max-height: 520px;
+}
+
+@media (max-width: 1000px) {
+  .simulador {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .simulador .resultado {
+    position: static;
+  }
+}

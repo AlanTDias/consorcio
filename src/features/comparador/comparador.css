@@ -1,0 +1,36 @@
+.comparacao {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.comparacao-coluna {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.comparacao-coluna[data-menor='true'] {
+  border-color: var(--laranja);
+}
+
+.comparacao-coluna header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.comparacao-coluna h2 {
+  font-size: 1.05rem;
+}
+
+.nota-coluna {
+  font-size: 0.85rem;
+}
+
+.comparacao-aviso {
+  margin-top: 1.5rem;
+}

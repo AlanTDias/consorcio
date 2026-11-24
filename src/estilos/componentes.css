@@ -1,0 +1,368 @@
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.pilha {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.pilha-sm {
+  display: grid;
+  gap: 1rem;
+}
+
+.ajuda-campo {
+  font-size: 0.8rem;
+  color: var(--prata-2);
+}
+
+.prefixo-campo,
+.sufixo-campo {
+  position: absolute;
+  color: var(--prata-2);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.prefixo-campo {
+  left: 0.9rem;
+}
+
+.sufixo-campo {
+  right: 0.9rem;
+}
+
+.entrada-com-prefixo {
+  padding-left: 2.5rem;
+}
+
+.entrada-com-sufixo {
+  padding-right: 3.2rem;
+}
+
+select.entrada {
+  appearance: none;
+  padding-right: 2.2rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #8e949b 50%),
+    linear-gradient(135deg, #8e949b 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.1rem) 50%,
+    calc(100% - 0.75rem) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+textarea.entrada {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.segmentado {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.segmentado legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.segmentado-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-sm);
+  background: var(--grafite-950);
+}
+
+.segmentado-opcao {
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 0.4rem 0.75rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--prata-2);
+  cursor: pointer;
+}
+
+.segmentado-opcao:hover {
+  color: var(--prata);
+}
+
+.segmentado-opcao[aria-pressed='true'] {
+  background: var(--grafite-800);
+  color: var(--prata);
+  box-shadow: inset 0 -2px 0 var(--laranja);
+}
+
+.interruptor {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0.35rem 0;
+}
+
+.interruptor input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.interruptor-trilho {
+  position: relative;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 24px;
+  margin-top: 0.1rem;
+  border-radius: 999px;
+  background: var(--grafite-950);
+  border: 1px solid var(--borda-forte);
+  transition: background-color 0.15s;
+}
+
+.interruptor-trilho::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--prata-2);
+  transition: transform 0.15s;
+}
+
+.interruptor input:checked + .interruptor-trilho {
+  background: var(--laranja);
+  border-color: var(--laranja);
+}
+
+.interruptor input:checked + .interruptor-trilho::after {
+  transform: translateX(18px);
+  background: var(--grafite-900);
+}
+
+.interruptor input:focus-visible + .interruptor-trilho {
+  outline: 2px solid var(--laranja);
+  outline-offset: 2px;
+}
+
+.interruptor-texto {
+  display: grid;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.interruptor-texto .texto-secundario {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.tabela-rolagem {
+  overflow: auto;
+  max-width: 100%;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-sm);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabela th,
+.tabela td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--grafite-950);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--prata-2);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tabela td.num,
+.tabela th.num {
+  text-align: right;
+}
+
+.tabela tbody tr:hover {
+  background: rgb(201 205 210 / 4%);
+}
+
+.tabela tr[data-destaque='true'] td {
+  background: rgb(255 106 19 / 8%);
+}
+
+.tabela a {
+  color: var(--prata);
+  font-weight: 600;
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--borda-forte);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--prata);
+}
+
+.etiqueta-ativa {
+  border-color: var(--laranja);
+  color: var(--laranja);
+}
+
+.etiqueta-sucesso {
+  border-color: rgb(123 216 160 / 50%);
+  color: var(--sucesso);
+}
+
+.etiqueta-erro {
+  border-color: rgb(255 122 112 / 50%);
+  color: var(--erro);
+}
+
+.lista-detalhe {
+  display: grid;
+  margin: 0;
+}
+
+.lista-detalhe > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.lista-detalhe > div:last-child {
+  border-bottom: 0;
+}
+
+.lista-detalhe dt {
+  color: var(--prata-2);
+}
+
+.lista-detalhe dd {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 1rem;
+}
+
+.indicador {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-sm);
+  background: var(--grafite-900);
+}
+
+.indicador-rotulo {
+  font-size: 0.82rem;
+  color: var(--prata-2);
+}
+
+.indicador-valor {
+  font-size: 1.2rem;
+  white-space: nowrap;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--prata);
+}
+
+.indicador-nota {
+  font-size: 0.8rem;
+  color: var(--prata-2);
+}
+
+.dialogo {
+  width: min(520px, calc(100vw - 2rem));
+  padding: 0;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio);
+  background: var(--grafite-800);
+  color: var(--prata);
+  box-shadow: var(--sombra);
+}
+
+.dialogo::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+
+.dialogo-corpo {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.dialogo-corpo h2 {
+  font-size: 1.15rem;
+}
+
+.link-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--prata-2);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link-voltar:hover {
+  color: var(--prata);
+}
+
+.btn-pequeno {
+  min-height: 36px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+}

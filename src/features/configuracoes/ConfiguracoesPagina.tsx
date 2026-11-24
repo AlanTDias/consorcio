@@ -1,12 +1,12 @@
 import { useId, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
-import { CircleAlert, CircleCheck, Download, RotateCcw, Save, Upload } from 'lucide-react'
+import { Download, RotateCcw, Save, Upload } from 'lucide-react'
 import { useConfig, useServicos } from '../../contexto'
 import { empresaSchema, type Config, type Empresa } from '../../data/esquemas'
 import { ErroBackup, TAMANHO_MAXIMO_BACKUP } from '../../data/local/repositoriosLocais'
+import { Aviso, type Mensagem } from '../../ui/campos'
 import { mascararCnpj } from '../../ui/mascaras'
+import { ParametrosFinanceiros } from './ParametrosFinanceiros'
 import './configuracoes.css'
-
-type Mensagem = { tipo: 'sucesso' | 'erro'; texto: string } | null
 
 const CAMPOS_EMPRESA: { campo: keyof Empresa; rotulo: string; placeholder: string }[] = [
   { campo: 'nomeSistema', rotulo: 'Nome do sistema', placeholder: 'Consórcio' },
@@ -22,12 +22,15 @@ const CAMPOS_EMPRESA: { campo: keyof Empresa; rotulo: string; placeholder: strin
 export function ConfiguracoesPagina() {
   const { config } = useConfig()
   const [mensagemEmpresa, setMensagemEmpresa] = useState<Mensagem>(null)
+  const [versao, setVersao] = useState(0)
   if (!config) return null
   return (
     <section className="configuracoes">
       <header className="cabecalho-pagina">
         <h1>Configurações</h1>
-        <p className="texto-secundario">Dados da empresa e cópia de segurança.</p>
+        <p className="texto-secundario">
+          Dados da empresa, taxas, categorias e cópia de segurança.
+        </p>
       </header>
       <FormularioEmpresa
         key={JSON.stringify(config.empresa)}
@@ -35,7 +38,13 @@ export function ConfiguracoesPagina() {
         mensagem={mensagemEmpresa}
         aoMudarMensagem={setMensagemEmpresa}
       />
-      <SecaoBackup aoRestaurar={() => setMensagemEmpresa(null)} />
+      <ParametrosFinanceiros key={versao} config={config} />
+      <SecaoBackup
+        aoRestaurar={() => {
+          setMensagemEmpresa(null)
+          setVersao((v) => v + 1)
+        }}
+      />
     </section>
   )
 }
@@ -137,8 +146,8 @@ function SecaoBackup({ aoRestaurar }: { aoRestaurar(): void }) {
     if (!window.confirm('Importar este backup substitui os dados atuais. Continuar?')) return
     try {
       await repositorios.backup.importar(await arquivo.text())
-      aoRestaurar()
       await recarregar()
+      aoRestaurar()
       setMensagem({ tipo: 'sucesso', texto: 'Backup importado com sucesso.' })
     } catch (erro) {
       setMensagem({
@@ -151,8 +160,8 @@ function SecaoBackup({ aoRestaurar }: { aoRestaurar(): void }) {
   async function restaurar() {
     if (!window.confirm('Apagar os dados deste navegador e restaurar os dados de exemplo?')) return
     await repositorios.backup.restaurarExemplo()
-    aoRestaurar()
     await recarregar()
+    aoRestaurar()
     setMensagem({ tipo: 'sucesso', texto: 'Dados de exemplo restaurados.' })
   }
 
@@ -189,18 +198,5 @@ function SecaoBackup({ aoRestaurar }: { aoRestaurar(): void }) {
         </button>
       </div>
     </section>
-  )
-}
-
-function Aviso({ mensagem }: { mensagem: NonNullable<Mensagem> }) {
-  const Icone = mensagem.tipo === 'sucesso' ? CircleCheck : CircleAlert
-  return (
-    <div
-      className={`alerta alerta-${mensagem.tipo}`}
-      role={mensagem.tipo === 'erro' ? 'alert' : 'status'}
-    >
-      <Icone size={18} aria-hidden="true" />
-      <span>{mensagem.texto}</span>
-    </div>
   )
 }

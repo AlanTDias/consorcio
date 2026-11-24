@@ -24,7 +24,8 @@
       "prazoMinMeses": 60,
       "prazoMaxMeses": 240,
       "cartaMin": 50000,
-      "cartaMax": 1500000
+      "cartaMax": 1500000,
+      "lanceFixoPct": 30
     },
     {
       "id": "veiculo",
@@ -33,7 +34,8 @@
       "prazoMinMeses": 12,
       "prazoMaxMeses": 100,
       "cartaMin": 20000,
-      "cartaMax": 400000
+      "cartaMax": 400000,
+      "lanceFixoPct": 30
     },
     {
       "id": "servico",
@@ -42,7 +44,8 @@
       "prazoMinMeses": 12,
       "prazoMaxMeses": 60,
       "cartaMin": 5000,
-      "cartaMax": 50000
+      "cartaMax": 50000,
+      "lanceFixoPct": 25
     }
   ]
 }

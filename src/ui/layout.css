@@ -118,9 +118,17 @@
 }
 
 .cabecalho-pagina {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.cabecalho-pagina > div:first-child {
   display: grid;
   gap: 0.35rem;
-  margin-bottom: 1.75rem;
 }
 
 .cabecalho-pagina h1 {
